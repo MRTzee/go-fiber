@@ -2,6 +2,8 @@ package config
 
 import (
 	"log"
+	"path/filepath"
+	"runtime"
 
 	"github.com/spf13/viper"
 )
@@ -16,6 +18,14 @@ type Config struct {
 }
 
 var ENV Config
+
+var (
+	// Get current file full path from runtime
+	_, b, _, _ = runtime.Caller(0)
+
+	// Root folder this project
+	ProjectRootPath = filepath.Join(filepath.Dir(b), "../")
+)
 
 func LoadConfig() {
 	viper.AddConfigPath(".")
