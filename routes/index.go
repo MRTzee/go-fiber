@@ -9,6 +9,7 @@ import (
 
 func RoutesIndex(r *fiber.App) {
 	r.Static("/public", config.ProjectRootPath+"/public/asset")
+	r.Post("/login", handler.LoginHandler)
 	r.Get("/users", middleware.Auth, handler.UserHandlerGetAll)
 	r.Get("/users/:id", handler.UserHandlerGetById)
 	r.Post("/users", handler.UserHandlerCreate)

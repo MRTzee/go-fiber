@@ -8,6 +8,7 @@ import (
 	"github.com/mrtzee/go-fiber/config"
 	"github.com/mrtzee/go-fiber/entity"
 	"github.com/mrtzee/go-fiber/model"
+	"github.com/mrtzee/go-fiber/utils"
 )
 
 func UserHandlerGetAll(ctx *fiber.Ctx) error {
@@ -34,11 +35,20 @@ func UserHandlerCreate(ctx *fiber.Ctx) error {
 		})
 	}
 
+	hashedPassword, err := utils.HashingPassword(user.Password)
+	if err != nil {
+		log.Println(err)
+		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Internal Server Error",
+		})
+	}
+
 	newUser := entity.User{
-		Name:    user.Name,
-		Email:   user.Email,
-		Address: user.Address,
-		Phone:   user.Phone,
+		Name:     user.Name,
+		Email:    user.Email,
+		Password: hashedPassword,
+		Address:  user.Address,
+		Phone:    user.Phone,
 	}
 
 	errCreateUser := config.DB.Create(&newUser).Error
