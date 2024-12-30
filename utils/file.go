@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-const DefaultPathAssetImage = "./public/images"
+const DefaultPathAssetImage = "./public/images/"
 
 func HandleSingleFile(ctx *fiber.Ctx) error {
 	file, errFile := ctx.FormFile("cover")
@@ -19,7 +20,9 @@ func HandleSingleFile(ctx *fiber.Ctx) error {
 	var filename *string
 	if file != nil {
 		filename = &file.Filename
-		errSaveFile := ctx.SaveFile(file, fmt.Sprintf("./public/images/%s", *filename))
+		extensionFile := filepath.Ext(*filename)
+		newFilename := fmt.Sprintf("gambar-%s", extensionFile)
+		errSaveFile := ctx.SaveFile(file, fmt.Sprintf("./public/images/%s", newFilename))
 		if errSaveFile != nil {
 			log.Println("Fail to store file into public/images")
 		}
@@ -48,7 +51,8 @@ func HandleMultipleFile(ctx *fiber.Ctx) error {
 	for i, file := range files {
 		var filename string
 		if file != nil {
-			filename = fmt.Sprintf("%d-%s", i, file.Filename)
+			extensionFile := filepath.Ext(file.Filename)
+			filename = fmt.Sprintf("%d-%s%s", i, "gambar", extensionFile)
 			errSaveFile := ctx.SaveFile(file, fmt.Sprintf("./public/images/%s", filename))
 			if errSaveFile != nil {
 				log.Println("Fail to store file into public/images")

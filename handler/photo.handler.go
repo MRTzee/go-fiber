@@ -11,6 +11,15 @@ import (
 	"github.com/mrtzee/go-fiber/utils"
 )
 
+func PhotoHandlerGetAll(ctx *fiber.Ctx) error {
+	var photos []entity.Photo
+	result := config.DB.Find(&photos)
+	if result != nil {
+		log.Println(result.Error)
+	}
+	return ctx.JSON(photos)
+}
+
 func PhotoHandlerCreate(ctx *fiber.Ctx) error {
 	photo := new(model.PhotoCreateRequest)
 	if err := ctx.BodyParser(photo); err != nil {

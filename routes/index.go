@@ -26,6 +26,7 @@ func RoutesIndex(r *fiber.App) {
 	r.Get("/category", handler.CategoryHandlerGetAll)
 	r.Post("/category", handler.CategoryHandlerCreate)
 
+	r.Get("/gallery", handler.PhotoHandlerGetAll)
 	r.Post("/gallery", utils.HandleMultipleFile, handler.PhotoHandlerCreate)
 	r.Delete("/gallery/:id", handler.PhotoHandlerDelete)
 }
