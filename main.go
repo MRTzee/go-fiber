@@ -1,6 +1,9 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/mrtzee/go-fiber/config"
 	"github.com/mrtzee/go-fiber/routes"
@@ -15,5 +18,9 @@ func main() {
 	// Routes
 	app := fiber.New()
 	routes.RoutesIndex(app)
-	app.Listen(":8080")
+	errListen := app.Listen(":8080")
+	if errListen != nil {
+		log.Println("Fail to listen server")
+		os.Exit(1)
+	}
 }

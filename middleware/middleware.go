@@ -31,7 +31,3 @@ func Auth(ctx *fiber.Ctx) error {
 	// ctx.Locals("userInfo", claims)
 	return ctx.Next()
 }
-
-func PermissionCreate(ctx *fiber.Ctx) error {
-	return ctx.Next()
-}
