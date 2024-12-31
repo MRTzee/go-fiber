@@ -8,7 +8,6 @@ A robust RESTful API built with Fiber framework, GORM, and PostgreSQL, featuring
 - **File Management** - Support for single and multiple file uploads
 - **Input Validation** - Comprehensive request validation
 - **PostgreSQL Database** - Reliable data persistence
-- **RESTful Architecture** - Clean and standardized API design
 
 ## 🛠 Technology Stack
 
