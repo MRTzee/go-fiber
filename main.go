@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -18,7 +19,7 @@ func main() {
 	// Routes
 	app := fiber.New()
 	routes.RoutesIndex(app)
-	errListen := app.Listen(":8080")
+	errListen := app.Listen(fmt.Sprintf(":%v", config.ENV.PORT))
 	if errListen != nil {
 		log.Println("Fail to listen server")
 		os.Exit(1)
