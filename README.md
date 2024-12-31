@@ -95,9 +95,11 @@ All protected endpoints require a JWT token in the `x-token` header. The token i
 
 Feel free to contribute to this project by creating issues or submitting pull requests.
 
-## 📄 License
+## 👨‍💻 Developed By
+[MRTzee](https://github.com/mrtzee)
 
-[MRTzee]
+## 📄 License
+MIT License
 
 ---
 ⭐️ If you find this project helpful, please give it a star!
